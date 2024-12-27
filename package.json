@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:yooz-app": "node dist/yooz-app/server/server.mjs"
+    "serve:ssr:yooz-app": "node dist/yooz-app/server/server.mjs",
+    "install": "npm install --force"
   },
   "private": true,
   "dependencies": {
@@ -15,6 +16,7 @@
     "@angular/common": "^19.0.0",
     "@angular/compiler": "^19.0.0",
     "@angular/core": "^19.0.0",
+    "@angular/fire": "^18.0.1",
     "@angular/forms": "^19.0.0",
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
@@ -22,7 +24,10 @@
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.0.6",
     "express": "^4.18.2",
+    "firebase": "^11.1.0",
     "rxjs": "~7.8.0",
+    "supertokens-auth-react": "^0.48.0",
+    "supertokens-web-js": "^0.14.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
