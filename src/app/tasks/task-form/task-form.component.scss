@@ -1,0 +1,25 @@
+/* src/app/tasks/task-form/task-form.component.scss */
+:host {
+  display: block;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+  
+  .form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  mat-dialog-content {
+    padding-top: 20px;
+  }
+  
+  mat-dialog-actions {
+    padding: 16px 0;
+    margin-bottom: 0;
+  }
+  
+  textarea {
+    resize: none;
+  }

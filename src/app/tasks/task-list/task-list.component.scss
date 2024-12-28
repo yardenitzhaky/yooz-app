@@ -1,0 +1,45 @@
+/* src/app/tasks/task-list/task-list.component.scss */
+:host {
+  display: block;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.task-list-container {
+  padding: 20px;
+  position: relative; // Ensure it has a positioning context
+  z-index: 10; // Adjust the value as needed
+}
+  
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .task-filter {
+    margin-bottom: 20px;
+  }
+  
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .task-card {
+    mat-card-content {
+      margin: 16px 0;
+    }
+  
+    mat-card-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+  
+    .mat-chip-listbox {
+      margin-top: 10px;
+    }
+  }

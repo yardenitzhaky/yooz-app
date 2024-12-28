@@ -1,1 +1,58 @@
-<p>task-list works!</p>
+<!-- src/app/tasks/task-list/task-list.component.html -->
+<div class="task-list-container">
+    <div class="task-header">
+      <h2>My Tasks</h2>
+      <button mat-raised-button color="primary" (click)="openTaskDialog()">
+        <mat-icon>add</mat-icon>
+        New Task
+      </button>
+    </div>
+  
+    <div class="task-filter">
+      <mat-form-field>
+        <mat-label>Filter by Status</mat-label>
+        <mat-select [(ngModel)]="selectedStatus" (selectionChange)="filterTasks()">
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{status}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <div class="task-grid">
+      <mat-card *ngFor="let task of filteredTasks" class="task-card">
+        <mat-card-header>
+          <mat-card-title>{{task.name}}</mat-card-title>
+          <mat-card-subtitle>Due: {{task.dueDate | date}}</mat-card-subtitle>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <p>{{task.description}}</p>
+          <mat-chip-listbox>
+            <mat-chip [color]="getStatusColor(task.status)" selected>
+              {{task.status}}
+            </mat-chip>
+          </mat-chip-listbox>
+        </mat-card-content>
+  
+        <mat-card-actions>
+          <button mat-button [matMenuTriggerFor]="statusMenu">
+            Change Status
+          </button>
+          <mat-menu #statusMenu="matMenu">
+            <button mat-menu-item *ngFor="let status of availableStatuses" 
+                    (click)="updateTaskStatus(task, status)">
+              {{status}}
+            </button>
+          </mat-menu>
+          
+          <button mat-button color="primary" (click)="openTaskDialog(task)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-button color="warn" (click)="deleteTask(task.id!)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>

@@ -1,0 +1,22 @@
+// src/app/profile/profile/profile.component.scss
+:host {
+    display: block;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  
+  .form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .password-section {
+    margin-top: 24px;
+  }
+  
+  .button-container {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+  }

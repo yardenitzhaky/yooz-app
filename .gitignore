@@ -5,11 +5,18 @@
 /tmp
 /out-tsc
 /bazel-out
+build/Release
 
 # Node
 /node_modules
-npm-debug.log
-yarn-error.log
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.node_repl_history
+.yarn-integrity
+.env
 
 # IDEs and editors
 .idea/
@@ -19,6 +26,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+.eslintcache
 
 # Visual Studio Code
 .vscode/*
@@ -36,7 +44,30 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+.lock-wscript
+.grunt
+bower_components
+lib-cov
+.nyc_output
+pids
+*.pid
+*.seed
+*.pid.lock
+*.tgz
 
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase
+.firebase/
+*-debug.log
+.runtimeconfig.json
+firebase-debug.log*
+firebase-debug.*.log*
+.dataconnect
+
+# Uncomment this if you'd like others to create their own Firebase project.
+# For a team working on the same Firebase project(s), it is recommended to leave
+# it commented so all members can deploy to the same project(s) in .firebaserc.
+# .firebaserc
