@@ -1,52 +1,199 @@
+/* src/app/references/reference-list/reference-list.component.scss */
 :host {
-    display: block;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 20px;
-  }
-
-  /* src/app/references/reference-list/reference-list.component.scss */
+  display: block;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
 
 .reference-container {
-  padding: 20px;
-}
+  .header {
+    margin-bottom: 2rem;
+    text-align: center;
 
-.reference-table {
-  width: 100%;
-  margin-top: 20px;
-}
+    h1 {
+      font-size: 2rem;
+      color: #1976d2;
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+    }
 
-.mat-mdc-row:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+    p {
+      color: #666;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  .mat-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+
+    .mat-card-header {
+      background: linear-gradient(135deg, #1976d2 0%, #64b5f6 100%);
+      padding: 1.5rem;
+      margin: -16px -16px 24px -16px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .mat-card-title {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 400;
+      }
+
+      .mat-icon {
+        font-size: 2rem;
+        height: 2rem;
+        width: 2rem;
+      }
+    }
+  }
+
+  .reference-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    background: transparent;
+
+    th {
+      color: #666;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1rem;
+      background: #f5f7fa;
+      border-bottom: none;
+
+      &:first-child {
+        border-radius: 8px 0 0 8px;
+      }
+
+      &:last-child {
+        border-radius: 0 8px 8px 0;
+      }
+    }
+
+    td {
+      padding: 1rem;
+      background: white;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+
+      &:first-child {
+        border-left: 1px solid #eee;
+        border-radius: 8px 0 0 8px;
+      }
+
+      &:last-child {
+        border-right: 1px solid #eee;
+        border-radius: 0 8px 8px 0;
+      }
+    }
+
+    tr {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        td {
+          background: #f8f9fa;
+        }
+      }
+    }
+
+    .mat-chip-set {
+      display: inline-flex;
+      
+      .mat-chip {
+        min-height: 24px;
+        padding: 4px 12px;
+        font-size: 0.8rem;
+      }
+    }
+
+    .timestamp-cell {
+      white-space: nowrap;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .description-cell {
+      color: #333;
+      line-height: 1.4;
+    }
+  }
 }
 
 .no-data {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
-  color: rgba(0, 0, 0, 0.54);
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 2rem;
 
   mat-icon {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
-    margin-bottom: 16px;
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #1976d2;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
   }
 }
 
-mat-progress-bar {
-  margin-bottom: 20px;
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  mat-progress-bar {
+    width: 200px;
+  }
 }
 
-.mat-column-timestamp {
-  width: 200px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.mat-column-entityType {
-  width: 100px;
-}
+/* Responsive styles */
+@media (max-width: 768px) {
+  .reference-table {
+    td, th {
+      padding: 0.75rem;
+    }
 
-.mat-column-action {
-  width: 100px;
+    .mat-chip {
+      font-size: 0.75rem;
+    }
+  }
 }

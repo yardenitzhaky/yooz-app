@@ -1,0 +1,181 @@
+/* src/app/auth/styles/auth.scss */
+
+/* Common styles for login and register containers */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1976d2 0%, #64b5f6 100%);
+    padding-top: 5vh;
+    
+    .headline {
+      color: white;
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease-out;
+      
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 300;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      
+      p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+    }
+  
+    mat-card {
+      width: 400px;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      animation: slideUp 0.6s ease-out;
+      background: rgba(255, 255, 255, 0.98);
+      
+      mat-card-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: #1976d2;
+        text-align: center;
+      }
+      
+      mat-form-field {
+        width: 100%;
+        margin-bottom: 1rem;
+        
+        &.mat-focused {
+          .mat-form-field-label {
+            color: #1976d2;
+          }
+        }
+      }
+      
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1.5rem 0;
+        
+        button {
+          width: 100%;
+          padding: 0.8rem;
+          border-radius: 4px;
+          font-size: 1rem;
+          transition: transform 0.2s ease;
+          
+          &:not(:disabled):hover {
+            transform: translateY(-2px);
+          }
+          
+          mat-icon {
+            margin-right: 8px;
+          }
+        }
+        
+        .google-btn {
+          background-color: white;
+          color: #757575;
+          border: 1px solid #dadce0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          
+          mat-icon {
+            color: #4285f4;
+          }
+          
+          &:hover {
+            background-color: #f8f9fa;
+          }
+        }
+      }
+      
+      .auth-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+        
+        p {
+          margin: 0;
+          color: #666;
+          
+          a {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            
+            &:hover {
+              color: #1565c0;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* Animations */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Input Animations */
+  .mat-form-field-appearance-fill {
+    .mat-form-field-flex {
+      background-color: rgba(0, 0, 0, 0.02);
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .auth-container {
+      padding: 1rem;
+      
+      .headline {
+        h1 {
+          font-size: 2rem;
+        }
+        
+        p {
+          font-size: 1rem;
+        }
+      }
+      
+      mat-card {
+        width: 100%;
+        max-width: 360px;
+        padding: 1.5rem;
+      }
+    }
+  }

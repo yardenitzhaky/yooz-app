@@ -1,51 +1,69 @@
-<!-- src/app/tasks/task-form/task-form.component.html -->
-<h2 mat-dialog-title>{{isEditMode ? 'Edit Task' : 'Create New Task'}}</h2>
+<div class="task-form-container">
+  <div class="task-form-header">
+    <mat-icon>{{isEditMode ? 'edit_note' : 'add_task'}}</mat-icon>
+    <h2>{{isEditMode ? 'Edit Task' : 'Create New Task'}}</h2>
+  </div>
 
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-  <mat-dialog-content>
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Task Name</mat-label>
-      <input matInput formControlName="name" required>
-      <mat-error *ngIf="taskForm.get('name')?.hasError('required')">
-        Name is required
-      </mat-error>
-    </mat-form-field>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-content">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Task Name</mat-label>
+        <mat-icon matPrefix>assignment</mat-icon>
+        <input matInput formControlName="name" required placeholder="Enter task name">
+        <mat-error *ngIf="taskForm.get('name')?.hasError('required')">
+          Task name is required
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Description</mat-label>
-      <textarea matInput formControlName="description" rows="3" required></textarea>
-      <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
-        Description is required
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Description</mat-label>
+        <mat-icon matPrefix>description</mat-icon>
+        <textarea matInput formControlName="description" rows="3" required 
+                  placeholder="Enter task description"></textarea>
+        <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
+          Description is required
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Due Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="dueDate" required>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="taskForm.get('dueDate')?.hasError('required')">
-        Due date is required
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Due Date</mat-label>
+        <mat-icon matPrefix>event</mat-icon>
+        <input matInput [matDatepicker]="picker" formControlName="dueDate" required
+               [min]="minDate" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="taskForm.get('dueDate')?.hasError('required')">
+          Due date is required
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Status</mat-label>
-      <mat-select formControlName="status" required>
-        <mat-option *ngFor="let status of statuses" [value]="status">
-          {{status}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="taskForm.get('status')?.hasError('required')">
-        Status is required
-      </mat-error>
-    </mat-form-field>
-  </mat-dialog-content>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Status</mat-label>
+        <mat-icon matPrefix>flag</mat-icon>
+        <mat-select formControlName="status" required class="status-select">
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            <div [class]="'status-chip ' + getStatusClass(status)">
+              {{status}}
+            </div>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="taskForm.get('status')?.hasError('required')">
+          Status is required
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-  <mat-dialog-actions align="end">
-    <button mat-button type="button" (click)="onCancel()">Cancel</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!taskForm.valid">
-      {{isEditMode ? 'Update' : 'Create'}}
-    </button>
-  </mat-dialog-actions>
-</form>
+    <div class="form-actions">
+      <button mat-button type="button" class="cancel-button" (click)="onCancel()">
+        <mat-icon>close</mat-icon>
+        Cancel
+      </button>
+      <button mat-raised-button color="primary" type="submit" 
+              [disabled]="!taskForm.valid || isSaving"
+              class="submit-button">
+        <mat-icon>{{isEditMode ? 'save' : 'add_circle'}}</mat-icon>
+        {{isEditMode ? 'Update Task' : 'Create Task'}}
+      </button>
+    </div>
+  </form>
+</div>

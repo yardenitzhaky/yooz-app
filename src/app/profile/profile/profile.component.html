@@ -1,22 +1,36 @@
 <!-- src/app/profile/profile/profile.component.html -->
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Profile Settings</mat-card-title>
-    </mat-card-header>
-    
-    <mat-card-content>
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="fill" class="form-field">
+<div class="profile-header">
+  <h1>Profile Settings</h1>
+  <p>Manage your account information and security</p>
+</div>
+
+<mat-card class="profile-card">
+  <mat-card-header>
+    <mat-card-title>Personal Information</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <!-- Personal Info Section -->
+      <div class="form-section">
+        <h3>
+          <mat-icon>person</mat-icon>
+          Basic Information
+        </h3>
+        
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Display Name</mat-label>
           <input matInput formControlName="displayName">
+          <mat-icon matPrefix>badge</mat-icon>
           <mat-error *ngIf="profileForm.get('displayName')?.hasError('required')">
             Display name is required
           </mat-error>
         </mat-form-field>
-  
-        <mat-form-field appearance="fill" class="form-field">
-          <mat-label>Email</mat-label>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email Address</mat-label>
           <input matInput formControlName="email" type="email">
+          <mat-icon matPrefix>email</mat-icon>
           <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
             Email is required
           </mat-error>
@@ -24,28 +38,52 @@
             Please enter a valid email
           </mat-error>
         </mat-form-field>
-  
-        <div class="password-section">
-          <h3>Change Password</h3>
-          <mat-form-field appearance="fill" class="form-field">
-            <mat-label>Current Password</mat-label>
-            <input matInput type="password" formControlName="currentPassword">
-          </mat-form-field>
-  
-          <mat-form-field appearance="fill" class="form-field">
-            <mat-label>New Password</mat-label>
-            <input matInput type="password" formControlName="newPassword">
-            <mat-error *ngIf="profileForm.get('newPassword')?.hasError('minlength')">
-              Password must be at least 6 characters
-            </mat-error>
-          </mat-form-field>
-        </div>
-  
-        <div class="button-container">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid || !profileForm.dirty">
-            Save Changes
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+      </div>
+
+      <!-- Password Section -->
+      <div class="password-section">
+        <h3>
+          <mat-icon>lock</mat-icon>
+          Change Password
+        </h3>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Current Password</mat-label>
+          <input matInput [type]="hideCurrentPassword ? 'password' : 'text'" 
+                 formControlName="currentPassword">
+          <mat-icon matPrefix>key</mat-icon>
+          <mat-icon matSuffix (click)="hideCurrentPassword = !hideCurrentPassword">
+            {{hideCurrentPassword ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>New Password</mat-label>
+          <input matInput [type]="hideNewPassword ? 'password' : 'text'" 
+                 formControlName="newPassword">
+          <mat-icon matPrefix>lock_reset</mat-icon>
+          <mat-icon matSuffix (click)="hideNewPassword = !hideNewPassword">
+            {{hideNewPassword ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+          <mat-error *ngIf="profileForm.get('newPassword')?.hasError('minlength')">
+            Password must be at least 6 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="button-container">
+        <button mat-button type="button" (click)="resetForm()">
+          <mat-icon>refresh</mat-icon>
+          Reset
+        </button>
+        
+        <button mat-raised-button color="primary" type="submit" 
+                [disabled]="!profileForm.valid || !profileForm.dirty">
+          <mat-icon>save</mat-icon>
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

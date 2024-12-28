@@ -1,9 +1,18 @@
 // src/app/references/services/reference.service.ts
-
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, query, where, orderBy, getDocs } from '@angular/fire/firestore';
+import { 
+  Firestore, 
+  collection, 
+  addDoc, 
+  query, 
+  where, 
+  orderBy, 
+  getDocs 
+} from '@angular/fire/firestore';
 import { Reference } from '../models/reference.interface';
 import { FirebaseService } from '../../core/services/firebase.service';
+import { take } from 'rxjs/operators';
+import { User } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +31,11 @@ export class ReferenceService {
     oldValue?: any,
     newValue?: any
   ) {
-    const userId = await this.firebaseService.getCurrentUserId();
-    if (!userId) throw new Error('User not authenticated');
+    const user = await this.firebaseService.getCurrentUser().pipe(take(1)).toPromise() as User;
+    if (!user) throw new Error('User not authenticated');
 
     const reference: Reference = {
-      userId,
+      userId: user.uid,
       entityType,
       entityId,
       action,
@@ -40,14 +49,14 @@ export class ReferenceService {
     await addDoc(referencesCollection, reference);
   }
 
-  async getUserReferences() {
-    const userId = await this.firebaseService.getCurrentUserId();
-    if (!userId) throw new Error('User not authenticated');
+  async getUserReferences(): Promise<Reference[]> {
+    const user = await this.firebaseService.getCurrentUser().pipe(take(1)).toPromise() as User;
+    if (!user) throw new Error('User not authenticated');
 
     const referencesCollection = collection(this.firestore, 'references');
     const q = query(
       referencesCollection,
-      where('userId', '==', userId),
+      where('userId', '==', user.uid),
       orderBy('timestamp', 'desc')
     );
 

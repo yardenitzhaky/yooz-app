@@ -1,40 +1,53 @@
-<div class="login-container">
-    <mat-card>
-      <mat-card-title>Login</mat-card-title>
-      <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <mat-form-field appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" required>
-            <mat-error *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
-              Email is required
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
-              Please enter a valid email
-            </mat-error>
-          </mat-form-field>
-  
-          <mat-form-field appearance="fill">
-            <mat-label>Password</mat-label>
-            <input matInput formControlName="password" type="password" required>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
-              Password is required
-            </mat-error>
-          </mat-form-field>
-  
-          <div class="button-container">
-            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
-  
-            <button mat-raised-button color="accent" type="button" (click)="onGoogleSignIn()">
-              <mat-icon>login</mat-icon>
-              Sign in with Google
-            </button>
-          </div>
-        </form>
-  
-        <div class="register-link">
-          <p>Don't have an account? <a routerLink="/auth/register">Register here</a></p>
-        </div>
-      </mat-card-content>
-    </mat-card>
+<div class="auth-container">
+  <div class="headline">
+    <h1>Welcome Back</h1>
+    <p>Sign in to continue to your workspace</p>
   </div>
+
+  <mat-card>
+    <mat-card-title>Sign In</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required>
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
+            Please enter a valid email
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+            {{hidePassword ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+            <mat-icon>login</mat-icon>
+            Sign In
+          </button>
+
+          <button mat-stroked-button class="google-btn" type="button" (click)="onGoogleSignIn()">
+            <mat-icon>account_circle</mat-icon>
+            Continue with Google
+          </button>
+        </div>
+      </form>
+
+      <div class="auth-link">
+        <p>Don't have an account? <a routerLink="/auth/register">Create Account</a></p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -27,10 +28,11 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss', '../auth.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  hidePassword = true;
 
   constructor(
     private fb: FormBuilder,

@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @Component({
@@ -23,13 +25,16 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
-    RouterModule
+    RouterModule,
+    MatIconModule
   ],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss', '../auth.scss']
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  hidePassword = true;
+  hideConfirmPassword = true;
 
   constructor(
     private fb: FormBuilder,
