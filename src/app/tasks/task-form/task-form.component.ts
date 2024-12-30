@@ -8,6 +8,21 @@ import { Task, TaskStatus } from '../models/task.interface';
 import { take } from 'rxjs/operators';
 import { User } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+
+// Define the date formats
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
 @Component({
   selector: 'app-task-form',
@@ -17,6 +32,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     MaterialModule,
     MatDialogModule
+  ],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
   ],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss']
