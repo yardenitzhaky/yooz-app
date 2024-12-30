@@ -7,8 +7,24 @@ A simple full-stack web application built with Angular, Firebase, and Material D
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Material](https://img.shields.io/badge/Material_UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white)
-
 </div>
+
+## 📸 Screenshots
+
+Here's a visual walkthrough of the application's main features:
+
+### Login Screen
+![Login Interface](screenshots/Login.png)
+
+### User Profile
+![Profile Management](screenshots/profile.png)
+
+### Task Management
+![Task Interface](screenshots/Tasks.png)
+
+### Activity Dashboard
+![Activity Tracking](screenshots/activity.png)
+
 
 ## 🚀 Getting Started
 
